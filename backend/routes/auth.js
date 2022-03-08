@@ -79,7 +79,9 @@ router.post(
         return res.status(400).json({ error: "Please try to login with correct details or Sign Up" });
       }
       const data = {
-        id: user.id,
+        user: {
+          id: user.id
+        }
       };
       const authToken = jwt.sign(data, JWT_SECRET);
       res.json({ authToken });
