@@ -14,7 +14,7 @@ const Home = () => {
                     <div className="mb-3">
                         <textarea className="form-control" id="" rows="3" placeholder="Description" />
                     </div>
-                    <button type="submit" class="btn btn-success mb-3 col-12">Add</button>
+                    <button type="submit" className="btn btn-success mb-3 col-12">Add</button>
                 </form>
             </div>
             <Notes />
