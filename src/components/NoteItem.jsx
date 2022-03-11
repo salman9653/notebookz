@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import noteContext from "../context/notes/NoteContext"
 
 const NoteItem = ({ note }) => {
+    const context = useContext(noteContext);
+    const { deleteNote } = context;
     return (
         <div className="col-lg-4 col-md-6">
             <div className="card text-dark bg-light mb-3">
@@ -12,7 +15,7 @@ const NoteItem = ({ note }) => {
                     <small>{note.tag}</small>
                     <div>
                         <i className="fa-solid fa-pen-to-square text-primary mx-3"></i>
-                        <i className="fa-solid fa-trash text-danger mx-3"></i>
+                        <i className="fa-solid fa-trash text-danger mx-3" onClick={() => { deleteNote(note._id) }}></i>
                     </div>
                 </div>
             </div>

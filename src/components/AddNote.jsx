@@ -27,10 +27,10 @@ function AddNote() {
                 <div className="mb-1">
                     <textarea className="form-control" name='description' id="description" onChange={handleChange} rows="2" placeholder="Description" />
                 </div>
-                <button type="submit" className="btn btn-sm btn-success mb-3 col-12" onClick={handleAdd}>Add</button>
+                <button type="submit" className="btn btn-sm btn-success mb-3 col-12" onClick={handleAdd}>Add Note</button>
             </form>
         </div>
     )
 }
 
-export default AddNote
+export default AddNote;
