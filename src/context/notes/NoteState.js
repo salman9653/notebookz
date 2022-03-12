@@ -2,39 +2,37 @@ import { useState } from "react";
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
-    const notesInitial = [
-        {
-            "_id": "62283aef1630227d507b0583",
-            "user": "6226f27aa0452c82db3fea47",
-            "title": "My Title",
-            "description": "this is the description of the note",
-            "tag": "tag1",
-            "date": "2022-03-09T05:28:15.721Z",
-            "__v": 0
-        },
-        {
-            "_id": "622adffb9442e4d91f0bd4b6",
-            "user": "6226f27aa0452c82db3fea47",
-            "title": "My Title",
-            "description": "this is the description of the note",
-            "tag": "tag",
-            "date": "2022-03-11T05:36:59.605Z",
-            "__v": 0
-        },
-        {
-            "_id": "622ae00f9442e4d91f0bd4b8",
-            "user": "6226f27aa0452c82db3fea47",
-            "title": "My New Title",
-            "description": "this is the description of the new note",
-            "tag": "new tag",
-            "date": "2022-03-11T05:37:19.159Z",
-            "__v": 0
-        }
-    ];
-
+    const host = "http://localhost:5000"
+    const notesInitial = [];
     const [notes, setNotes] = useState(notesInitial);
+
+    // Get all Notes
+    const getNotes = async () => {
+        // API Call
+        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+            method: 'GET',
+            headers: {
+                'Contrnt-Type': 'application/json',
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyNmYyN2FhMDQ1MmM4MmRiM2ZlYTQ3In0sImlhdCI6MTY0NjcyOTY3Mn0.S-vg17RRWrEC4cILMv3vekOzu_46IHBW_WV1i1w7dsI'
+            }
+        });
+        const json = await response.json();
+        setNotes(json);
+    }
+
     // Add a Note
-    const addNote = (title, description, tag) => {
+    const addNote = async (title, description, tag) => {
+        // API Call
+        const response = await fetch(`${host}/api/notes/addnote`, {
+            method: 'POST',
+            headers: {
+                'Contrnt-Type': 'application/json',
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyNmYyN2FhMDQ1MmM4MmRiM2ZlYTQ3In0sImlhdCI6MTY0NjcyOTY3Mn0.S-vg17RRWrEC4cILMv3vekOzu_46IHBW_WV1i1w7dsI'
+            },
+            body: JSON.stringify({ title, description, tag })
+        });
+
+        // logic to add note in client
         const note = {
             "title": title,
             "description": description,
@@ -44,18 +42,41 @@ const NoteState = (props) => {
     }
 
     //Edit a Note
-    const editNote = (id) => {
+    const editNote = async (id, title, description, tag) => {
+        // API Call
+        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Contrnt-Type': 'application/json',
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyNmYyN2FhMDQ1MmM4MmRiM2ZlYTQ3In0sImlhdCI6MTY0NjcyOTY3Mn0.S-vg17RRWrEC4cILMv3vekOzu_46IHBW_WV1i1w7dsI'
+            },
+            body: JSON.stringify({ title, description, tag })
+        });
+        const json = response.json();
 
+        // logic to edit note in client
+        for (let index = 0; index < notes.length; index++) {
+            const element = notes[index];
+            if (element._id === id) {
+                element.title = title;
+                element.description = description;
+                element.tag = tag;
+            }
+
+        }
     }
 
     //Delete a Note
     const deleteNote = (id) => {
+
+
+        // logic to delete note in client
         const newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes)
     }
 
     return (
-        <NoteContext.Provider value={{ notes, addNote, editNote, deleteNote }}>
+        <NoteContext.Provider value={{ notes, getNotes, addNote, editNote, deleteNote }}>
             {props.children}
         </NoteContext.Provider>
     );
