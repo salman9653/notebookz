@@ -6,13 +6,12 @@ function AddNote() {
     const { addNote } = context;
 
     const [note, setNote] = useState({ title: "", tag: "", description: "" })
-    const handleChange = (e) => {
-        setNote({ ...note, [e.target.name]: e.target.value })
-    }
     const handleAdd = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
-
+    }
+    const handleChange = (e) => {
+        setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
         <div className='container text-center py-2 my-2 col-lg-5'>
