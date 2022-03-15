@@ -9,6 +9,7 @@ function AddNote() {
     const handleAdd = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
+        setNote({ title: "", tag: "", description: "" })
     }
     const handleChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
@@ -18,15 +19,40 @@ function AddNote() {
             <h4> <span style={{ fontSize: "30px" }}>A</span>DD A <span style={{ fontSize: "30px" }}>N</span>OTE </h4>
             <form>
                 <div className="mb-1">
-                    <input type="text" className="form-control" name='title' id="title" onChange={handleChange} placeholder="Title" />
+                    <input
+                        type="text"
+                        className="form-control"
+                        name='title'
+                        id="title"
+                        onChange={handleChange}
+                        value={note.title}
+                        placeholder="Title" />
                 </div>
                 <div className="mb-1">
-                    <input type="text" className="form-control" name='tag' id="tag" onChange={handleChange} placeholder="Tags" />
+                    <input
+                        type="text"
+                        className="form-control"
+                        name='tag' id="tag"
+                        onChange={handleChange}
+                        value={note.tag}
+                        placeholder="Tags" />
                 </div>
                 <div className="mb-1">
-                    <textarea className="form-control" name='description' id="description" onChange={handleChange} rows="2" placeholder="Description" />
+                    <textarea
+                        className="form-control"
+                        name='description'
+                        id="description"
+                        onChange={handleChange}
+                        rows="2"
+                        value={note.description}
+                        placeholder="Description" />
                 </div>
-                <button type="submit" className="btn btn-sm btn-success mb-3 col-12" onClick={handleAdd}>Add Note</button>
+                <button
+                    type="submit"
+                    className="btn btn-sm btn-success mb-3 col-12"
+                    onClick={handleAdd}
+                    disabled={note.title.length < 3 || note.description.length < 5}
+                >Add Note</button>
             </form>
         </div>
     )

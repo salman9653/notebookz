@@ -41,18 +41,35 @@ const Notes = () => {
                         <div className="modal-body">
                             <form>
                                 <div className="mb-1">
-                                    <input type="text" className="form-control" name='etitle' id="etitle" onChange={handleChange} value={note.etitle} />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        name='etitle'
+                                        id="etitle"
+                                        onChange={handleChange}
+                                        value={note.etitle} />
                                 </div>
                                 <div className="mb-1">
                                     <input type="text" className="form-control" name='etag' id="etag" onChange={handleChange} value={note.etag} />
                                 </div>
                                 <div className="mb-1">
-                                    <textarea className="form-control" name='edescription' id="edescription" onChange={handleChange} rows="2" value={note.edescription} />
+                                    <textarea
+                                        className="form-control"
+                                        name='edescription'
+                                        id="edescription"
+                                        onChange={handleChange}
+                                        rows="2"
+                                        value={note.edescription} />
                                 </div>
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={handleClick} className="btn btn-primary px-5">Update</button>
+                            <button
+                                type="button"
+                                onClick={handleClick}
+                                className="btn btn-primary px-5"
+                                disabled={note.etitle.length < 3 || note.edescription.length < 5}
+                            >Update</button>
                         </div>
                     </div>
                 </div>
