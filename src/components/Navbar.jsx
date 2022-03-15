@@ -16,6 +16,10 @@ function Navbar() {
                         <Link className={`nav-link ${location.pathname === '/about' && 'active'}`} to="/about">About</Link>
                     </div>
                 </div>
+                <form className="d-flex">
+                    <Link className="btn btn-info mx-1" to='/signup' style={{ width: "100px" }} role="button">Sign Up</Link>
+                    <Link className="btn btn-info mx-1" to='/login' style={{ width: "100px" }} role="button">Log In</Link>
+                </form>
             </div>
         </nav>
     )
