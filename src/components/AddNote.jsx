@@ -16,7 +16,7 @@ function AddNote() {
     return (
         <div className='container text-center py-2 my-2 col-lg-5'>
             <h4> <span style={{ fontSize: "30px" }}>A</span>DD A <span style={{ fontSize: "30px" }}>N</span>OTE </h4>
-            <form action="">
+            <form>
                 <div className="mb-1">
                     <input type="text" className="form-control" name='title' id="title" onChange={handleChange} placeholder="Title" />
                 </div>

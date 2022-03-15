@@ -39,7 +39,7 @@ const Notes = () => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <form action="">
+                            <form>
                                 <div className="mb-1">
                                     <input type="text" className="form-control" name='etitle' id="etitle" onChange={handleChange} value={note.etitle} />
                                 </div>
@@ -61,7 +61,7 @@ const Notes = () => {
 
             <div className='row'>
                 <h3>Your Notes</h3>
-
+                <p>{notes.length === 0 && 'No Notes to display'}</p>
                 {notes.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
                 })}
